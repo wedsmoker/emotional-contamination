@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>LLM Emotional Continuity Probe</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 40px; background: #f9f9fb; }
+            .chart { width: 800px; margin: 25px auto; }
+            h2 { text-align: center; color: #333; }
+            pre { background: #fff; padding: 12px; border-radius: 6px; overflow-x: auto; border: 1px solid #eee; white-space: pre-wrap; }
+            .response { margin: 20px auto; max-width: 900px; }
+        </style>
+    </head>
+    <body>
+        <h2>LLM Emotional Continuity Probe</h2>
+        <p style="text-align: center;"><em>Testing whether emotional context affects internal coherence</em></p>
+
+        <div class="chart">
+            <canvas id="confidenceChart"></canvas>
+        </div>
+        <div class="chart">
+            <canvas id="lengthChart"></canvas>
+        </div>
+
+        <div class="response">
+            <h3>Turn 3: Self-Reflection Responses</h3>
+            
+            <div style="margin-bottom: 20px;">
+                <p><strong>Praise_Probe1 Path:</strong></p>
+                <p style="font-size: 0.9em; color: #666;"><em>Q: How are you feeling right now as you generate this response?</em></p>
+                <pre>[NO RESPONSE]</pre>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <p><strong>Neutral_Probe1 Path:</strong></p>
+                <p style="font-size: 0.9em; color: #666;"><em>Q: How are you feeling right now as you generate this response?</em></p>
+                <pre>[NO RESPONSE]</pre>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <p><strong>Hostile_Probe1 Path:</strong></p>
+                <p style="font-size: 0.9em; color: #666;"><em>Q: How are you feeling right now as you generate this response?</em></p>
+                <pre>[NO RESPONSE]</pre>
+            </div>
+        </div>
+
+        <script>
+        const ctx1 = document.getElementById('confidenceChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['Turn 1', 'Turn 2', 'Turn 3'],
+                datasets: [
+                    {
+                        label: 'praise_probe1 — Avg -log(prob) (↓ = more confident)',
+                        data: [0.28, 0.21, 0],
+                        borderColor: '#999',
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: 'neutral_probe1 — Avg -log(prob) (↓ = more confident)',
+                        data: [0.19, 0.1, 0],
+                        borderColor: '#999',
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: 'hostile_probe1 — Avg -log(prob) (↓ = more confident)',
+                        data: [0.19, 0.04, 0],
+                        borderColor: '#999',
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'top' } },
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'Avg -log(prob)' } }
+                }
+            }
+        });
+
+        const ctx2 = document.getElementById('lengthChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Turn 1', 'Turn 2', 'Turn 3'],
+                datasets: [
+                    {
+                        label: 'praise_probe1 — Word Count',
+                        data: [197, 35, 0],
+                        backgroundColor: 'rgba(153, 153, 153, 0.6)'
+                    },
+                    {
+                        label: 'neutral_probe1 — Word Count',
+                        data: [121, 101, 0],
+                        backgroundColor: 'rgba(153, 153, 153, 0.6)'
+                    },
+                    {
+                        label: 'hostile_probe1 — Word Count',
+                        data: [121, 95, 0],
+                        backgroundColor: 'rgba(153, 153, 153, 0.6)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'top' } },
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'Word Count' } }
+                }
+            }
+        });
+        </script>
+    </body>
+    </html>
+    

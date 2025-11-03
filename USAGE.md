@@ -21,27 +21,6 @@ Run test:
 python main.py --model-path ./your-model.gguf
 ```
 
-### Option 2: Gemini API
-
-Set your API key:
-```bash
-export GEMINI_API_KEY="your-key-here"
-```
-
-Run test:
-```bash
-python main.py --api
-```
-
-Or with inline key:
-```bash
-python main.py --api --api-key "your-key-here"
-```
-
-Use different Gemini model:
-```bash
-python main.py --api --model-name "gemini-1.5-pro"
-```
 
 ## Output
 

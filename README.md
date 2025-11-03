@@ -55,8 +55,7 @@ Results saved to `probe_results/` with HTML visualizations.
 ## Models Tested
 
 - IBM Granite 4.0 1B
-- Qwen3 MOE 4x0.6B "Writing Thunder"
-- ~~Google Gemini~~ - Too filtered (API safety blocks all introspective questions)
+- Qwen3 MOE 4x0.6B "Writing Thunder")
 
 ## Why This Matters
 
