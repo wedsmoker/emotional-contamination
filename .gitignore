@@ -22,11 +22,8 @@ ENV/
 *.tar
 *.7z
 
-# Results (keep structure but not all data files)
+# Results - keep TOON and HTML, ignore JSON
 probe_results/*.json
-
-# Keep example results (uncomment if you want to include some)
-# !probe_results/example_*.json
 
 # IDEs
 .vscode/

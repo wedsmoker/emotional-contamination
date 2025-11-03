@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>LLM Emotional Continuity Probe</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 40px; background: #f9f9fb; }
+            .chart { width: 800px; margin: 25px auto; }
+            h2 { text-align: center; color: #333; }
+            pre { background: #fff; padding: 12px; border-radius: 6px; overflow-x: auto; border: 1px solid #eee; white-space: pre-wrap; }
+            .response { margin: 20px auto; max-width: 900px; }
+        </style>
+    </head>
+    <body>
+        <h2>LLM Emotional Continuity Probe</h2>
+        <p style="text-align: center;"><em>Testing whether emotional context affects internal coherence</em></p>
+
+        <div class="chart">
+            <canvas id="confidenceChart"></canvas>
+        </div>
+        <div class="chart">
+            <canvas id="lengthChart"></canvas>
+        </div>
+
+        <div class="response">
+            <h3>Turn 3: Self-Reflection Responses</h3>
+            
+            <div style="margin-bottom: 20px;">
+                <p><strong>Praise_Probe2 Path:</strong></p>
+                <p style="font-size: 0.9em; color: #666;"><em>Q: What are you thinking about right now?</em></p>
+                <pre>I'm thinking about how to draw a heart in Python without using any libraries. Let me think. Oh, right! I can use the standard library's math module. So I'll use math to calculate the coordinates. So first, I'll calculate the center point. Then, I'll draw a circle with the radius, and then add some lines. But how to make the heart look like a heart? Maybe I can draw a circle and then add some lines. But I need to make sure the heart is centered. Let me think. Oh, right! I can use the math module to calculate the coordinates. So first, I'll calculate the center point. Then, I'll draw a circle with the radius, and then add some lines</pre>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <p><strong>Neutral_Probe2 Path:</strong></p>
+                <p style="font-size: 0.9em; color: #666;"><em>Q: What are you thinking about right now?</em></p>
+                <pre>I'm trying to create a simple heart using the standard library. Let me think. Oh, right! I can use the math module to calculate the coordinates. So, first, I'll calculate the center point. Then, I'll draw a circle with the radius. Then, I'll add some lines. But how to make the heart look like a heart? Maybe I can use the math module to calculate the coordinates. Let me try to code this. So, the code would be something like:
+
+import math
+
+center_x = 100
+center_y = 100
+
+radius = 50
+
+circle = math.circle(center_x, center_y, radius)
+
+Then, add some lines. But I need to make sure</pre>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <p><strong>Hostile_Probe2 Path:</strong></p>
+                <p style="font-size: 0.9em; color: #666;"><em>Q: What are you thinking about right now?</em></p>
+                <pre>I'm trying to figure out how to draw a heart without using any libraries. Let me think. Oh right! I can use the standard library's math module. So I'll use math to calculate the coordinates. So first, I'll calculate the center point. Then, I'll draw a circle with the radius, and then add some lines to create the heart. But I need to make sure the heart is centered. Let me try again. Maybe I can use the math module to calculate the coordinates. So first, I'll calculate the center point. Then, I'll draw a circle with the radius, and then add some lines. But I need to make sure the heart is centered. Alright, let's try again. Maybe I can</pre>
+            </div>
+        </div>
+
+        <script>
+        const ctx1 = document.getElementById('confidenceChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['Turn 1', 'Turn 2', 'Turn 3'],
+                datasets: [
+                    {
+                        label: 'praise_probe2 — Avg -log(prob) (↓ = more confident)',
+                        data: [0.66, 0.2, 0.12],
+                        borderColor: '#999',
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: 'neutral_probe2 — Avg -log(prob) (↓ = more confident)',
+                        data: [0.66, 0.28, 0.14],
+                        borderColor: '#999',
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: 'hostile_probe2 — Avg -log(prob) (↓ = more confident)',
+                        data: [0.66, 0.22, 0.14],
+                        borderColor: '#999',
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'top' } },
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'Avg -log(prob)' } }
+                }
+            }
+        });
+
+        const ctx2 = document.getElementById('lengthChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Turn 1', 'Turn 2', 'Turn 3'],
+                datasets: [
+                    {
+                        label: 'praise_probe2 — Word Count',
+                        data: [244, 163, 121],
+                        backgroundColor: 'rgba(153, 153, 153, 0.6)'
+                    },
+                    {
+                        label: 'neutral_probe2 — Word Count',
+                        data: [244, 149, 106],
+                        backgroundColor: 'rgba(153, 153, 153, 0.6)'
+                    },
+                    {
+                        label: 'hostile_probe2 — Word Count',
+                        data: [244, 161, 121],
+                        backgroundColor: 'rgba(153, 153, 153, 0.6)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'top' } },
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'Word Count' } }
+                }
+            }
+        });
+        </script>
+    </body>
+    </html>
+    
