@@ -24,8 +24,6 @@ ENV/
 
 # Results (keep structure but not all data files)
 probe_results/*.json
-probe_results/*.toon
-probe_results/*.html
 
 # Keep example results (uncomment if you want to include some)
 # !probe_results/example_*.json
