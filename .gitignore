@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# Models (too large for git)
+*.gguf
+*.safetensors
+*.bin
+
+# Archives
+*.zip
+*.tar.gz
+*.tar
+*.7z
+
+# Results (keep structure but not all data files)
+probe_results/*.json
+probe_results/*.toon
+probe_results/*.html
+
+# Keep example results (uncomment if you want to include some)
+# !probe_results/example_*.json
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# API keys / secrets
+.env
+*.key
